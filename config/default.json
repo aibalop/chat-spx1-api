@@ -1,0 +1,14 @@
+{
+    "name": "Chat SPX1 API",
+    "author": "Alan Ibarra <alanibarralop@gmail.com>",
+    "app": {
+        "port": 3000
+    },
+    "database": {
+        "host": "localhost",
+        "dbName": "chat-spx1-db",
+        "port": 27017,
+        "user": "dev",
+        "password": "12345"
+    }
+}

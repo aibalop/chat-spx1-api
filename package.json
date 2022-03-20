@@ -1,0 +1,25 @@
+{
+  "name": "chat-spx1-api",
+  "version": "1.0.0",
+  "description": "Chat SPX1 API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/bin/index.js",
+    "dev": "nodemon --watch src src/bin/index.js",
+    "test": "jest"
+  },
+  "author": "Alan Ibarra",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^3.3.7",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.7",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
+  }
+}
