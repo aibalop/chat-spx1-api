@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const hash = require('../utils/hash.util');
+const hashUtil = require('../utils/hash.util');
 
 const userSchema = new mongoose.Schema({
     name: { type: String, required: [true, 'Nombre es requerido'] },
@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre('save', function (next) {
     if (this.password) {
-        this.password = hash.generate(this.password);
+        this.password = hashUtil.generate(this.password);
     }
     next();
 });
