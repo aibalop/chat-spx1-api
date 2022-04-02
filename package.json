@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/bin/index.js",
-    "dev": "nodemon --watch src src/bin/index.js",
+    "start:dev": "nodemon --watch src src/bin/index.js",
     "test": "jest"
   },
   "author": "Alan Ibarra",
@@ -15,6 +15,7 @@
     "config": "^3.3.7",
     "cors": "^2.8.5",
     "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.7",
     "morgan": "^1.10.0"
   },

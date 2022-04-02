@@ -2,7 +2,8 @@
     "name": "Chat SPX1 API",
     "author": "Alan Ibarra <alanibarralop@gmail.com>",
     "app": {
-        "port": 3000
+        "port": 3000,
+        "secret": "5wy!%65%Y*5r~HJX"
     },
     "database": {
         "host": "localhost",
