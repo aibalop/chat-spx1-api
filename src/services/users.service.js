@@ -8,3 +8,13 @@ exports.create = (user) => {
 exports.getByUsername = (username) => {
     return User.findOne({ username });
 };
+
+exports.getAll = (query) => {
+    const filters = {};
+
+    if (query?.ignoreId) {
+        filters['_id'] = { $ne: query.ignoreId };
+    }
+
+    return User.find(filters);
+};
