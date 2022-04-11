@@ -21,6 +21,18 @@ exports.getAll = async (req, res) => {
     }
 };
 
+exports.getAllConversations = async (req, res) => {
+    try {
+        const query = req.query ?? {};
+        query['userId'] = req.params.userId;
+        const conversations = await conversationsService.getAll(query);
+        res.status(200).json(conversations);
+    } catch (error) {
+        res.status(400).json({ message: error.toString() });
+    }
+};
+
+
 exports.createConversation = async (req, res) => {
     try {
         const { userId: senderUserId } = req.params;
