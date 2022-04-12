@@ -12,7 +12,4 @@ router.route(`/${prefix}/:userId/conversations`)
     .get(jwtRequired, usersController.getAllConversations)
     .post(jwtRequired, usersController.createConversation);
 
-// router.route(`/${prefix}/:userId/conversations/:conversationId`)
-//     .get(jwtRequired, usersController.getAllConversations);
-
 module.exports = router;

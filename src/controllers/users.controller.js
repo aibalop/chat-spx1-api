@@ -32,7 +32,6 @@ exports.getAllConversations = async (req, res) => {
     }
 };
 
-
 exports.createConversation = async (req, res) => {
     try {
         const { userId: senderUserId } = req.params;
