@@ -8,6 +8,7 @@ router.route(`/${prefix}/:conversationId`)
     .get(jwtRequired, conversationsController.getById);
 
 router.route(`/${prefix}/:conversationId/messages`)
+    .get(jwtRequired, conversationsController.getMessages)
     .post(jwtRequired, conversationsController.createMessage);
 
 module.exports = router;

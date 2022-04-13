@@ -1,5 +1,6 @@
 const conversationsService = require('../services/conversations.service');
 const messagesService = require('../services/messages.service');
+const { isValidObjectId } = require('mongoose');
 
 exports.getById = async (req, res) => {
     try {
@@ -8,6 +9,19 @@ exports.getById = async (req, res) => {
             return res.status(404).json({ message: 'No se encontro la conversación' });
         }
         res.status(200).json(conversation);
+    } catch (error) {
+        res.status(400).json({ message: error.toString() });
+    }
+};
+
+exports.getMessages = async (req, res) => {
+    try {
+        const { conversationId } = req.params;
+        if (!conversationId || !isValidObjectId(conversationId)) {
+            throw new Error('El ID de la conversación no es válido');
+        }
+        const messages = await messagesService.getMessages(conversationId);
+        res.status(200).json(messages);
     } catch (error) {
         res.status(400).json({ message: error.toString() });
     }
