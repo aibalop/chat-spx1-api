@@ -43,7 +43,9 @@ exports.getAll = async (query) => {
         from: "messages",
         let: { conversationId: "$_id" },
         pipeline: [
-          { $match: { $expr: { conversationId: "$$conversationId" } } },
+          {
+            $match: { $expr: { $eq: ["$conversationId", "$$conversationId"] } },
+          },
           { $sort: { createdAt: -1 } },
           { $limit: 1 },
           {
@@ -77,8 +79,8 @@ exports.getByUserOneAndUserTwo = async (userOneId, userTwoId) => {
       { userOneId: userTwoId, userTwoId: userOneId },
     ],
   })
-    .populate('userOneId', '_id name lastName username')
-    .populate('userTwoId', '_id name lastName username');
+    .populate("userOneId", "_id name lastName username")
+    .populate("userTwoId", "_id name lastName username");
 };
 
 exports.create = async (senderUserId, recipientUserId, message) => {
@@ -114,4 +116,3 @@ exports.create = async (senderUserId, recipientUserId, message) => {
 
   return conversation;
 };
-
