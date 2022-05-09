@@ -1,5 +1,5 @@
-const usersService = require("../services/users.service");
-const conversationsService = require("../services/conversations.service");
+const usersService = require('../services/users.service');
+const conversationsService = require('../services/conversations.service');
 
 exports.create = async (req, res) => {
   try {
@@ -13,7 +13,7 @@ exports.create = async (req, res) => {
 exports.getAll = async (req, res) => {
   try {
     const query = req.query ?? {};
-    query["ignoreId"] = req.payload?._id;
+    query['ignoreId'] = req.payload?._id;
     const users = await usersService.getAll(query);
     res.status(200).json(users);
   } catch (error) {
@@ -24,7 +24,7 @@ exports.getAll = async (req, res) => {
 exports.getAllConversations = async (req, res) => {
   try {
     const query = req.query ?? {};
-    query["userId"] = req.params.userId;
+    query['userId'] = req.params.userId;
     const conversations = await conversationsService.getAll(query);
     res.status(200).json(conversations);
   } catch (error) {
@@ -37,7 +37,7 @@ exports.createConversation = async (req, res) => {
     const { userId: senderUserId } = req.params;
     const { recipientUserId, message } = req.body;
     if (!recipientUserId || !message) {
-      throw new Error("Campos faltantes (destinatario o mensaje)");
+      throw new Error('Campos faltantes (destinatario o mensaje)');
     }
     const conversation = await conversationsService.create(
       senderUserId,
@@ -49,4 +49,3 @@ exports.createConversation = async (req, res) => {
     res.status(400).json({ message: error.toString() });
   }
 };
-

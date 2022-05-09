@@ -1,6 +1,6 @@
-const conversationsService = require("../services/conversations.service");
-const messagesService = require("../services/messages.service");
-const { isValidObjectId } = require("mongoose");
+const conversationsService = require('../services/conversations.service');
+const messagesService = require('../services/messages.service');
+const { isValidObjectId } = require('mongoose');
 
 exports.getById = async (req, res) => {
   try {
@@ -10,7 +10,7 @@ exports.getById = async (req, res) => {
     if (!conversation) {
       return res
         .status(404)
-        .json({ message: "No se encontro la conversación" });
+        .json({ message: 'No se encontro la conversación' });
     }
     res.status(200).json(conversation);
   } catch (error) {
@@ -28,7 +28,7 @@ exports.getConversationWithUser = async (req, res) => {
     );
     if (!conversation) {
       return res.status(404).json({
-        message: "No se encontro una conversación entre los usuarios",
+        message: 'No se encontro una conversación entre los usuarios',
       });
     }
     res.status(200).json(conversation);
@@ -41,7 +41,7 @@ exports.getMessages = async (req, res) => {
   try {
     const { conversationId } = req.params;
     if (!conversationId || !isValidObjectId(conversationId)) {
-      throw new Error("El ID de la conversación no es válido");
+      throw new Error('El ID de la conversación no es válido');
     }
     const messages = await messagesService.getMessages(conversationId);
     res.status(200).json(messages);
@@ -58,15 +58,15 @@ exports.createMessage = async (req, res) => {
     if (!conversation) {
       return res
         .status(404)
-        .json({ message: "No se encontro la conversación" });
+        .json({ message: 'No se encontro la conversación' });
     }
     const { message } = req.body;
     const { _id: userId } = req.payload;
     if (!userId) {
-      throw new Error("No se indentifica el usuario que hace la petición");
+      throw new Error('No se indentifica el usuario que hace la petición');
     }
     if (!message || !message.trim()) {
-      throw new Error("No se encontro un mensaje que enviar");
+      throw new Error('No se encontro un mensaje que enviar');
     }
     const messageCreated = await messagesService.create(
       conversation._id,
