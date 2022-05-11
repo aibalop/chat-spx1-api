@@ -1,11 +1,12 @@
 const app = require('../app');
 const config = require('config');
 const mongoose = require('mongoose');
-const http = require('http');
-const server = http.createServer(app);
-
-const { Server } = require('socket.io');
-const io = new Server(server);
+const server = require('http').createServer(app);
+const io = require('socket.io')(server, {
+  cors: {
+    origin: '*',
+  },
+});
 
 mongoose.connect(
   `mongodb://${config.get('database.user')}:${config.get(
@@ -21,7 +22,7 @@ mongoose.connect(
         console.log('A user connected');
       });
 
-      app.listen(config.get('app.port') || 3001, () => {
+      server.listen(config.get('app.port') || 3001, () => {
         console.log(`API: ${config.get('name')}`);
         console.log(`Author: ${config.get('author')}`);
         console.log(`API runs in port: ${config.get('app.port') || 3001}`);
