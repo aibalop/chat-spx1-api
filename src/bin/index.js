@@ -20,6 +20,17 @@ mongoose.connect(
     } else {
       io.on('connection', (socket) => {
         console.log('A user connected');
+
+        socket.on('new-message', (conversation) => {
+          console.log(conversation);
+          io.emit(`listen-conversation-${conversation._id}`);
+          io.emit(
+            `listen-conversation-list-user-${conversation.userOneId._id}`
+          );
+          io.emit(
+            `listen-conversation-list-user-${conversation.userTwoId._id}`
+          );
+        });
       });
 
       server.listen(config.get('app.port') || 3001, () => {

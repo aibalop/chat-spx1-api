@@ -63,7 +63,7 @@ exports.getAll = async (query) => {
       $unwind: '$lastMessage',
     },
     {
-      $sort: { updatedAt: -1 },
+      $sort: { 'lastMessage.createdAt': -1 },
     },
   ]);
 };
@@ -114,5 +114,7 @@ exports.create = async (senderUserId, recipientUserId, message) => {
     throw error;
   }
 
-  return conversation;
+  return Conversation.findById(conversation._id)
+    .populate('userOneId')
+    .populate('userTwoId');
 };
